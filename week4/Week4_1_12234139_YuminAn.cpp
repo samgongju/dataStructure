@@ -39,7 +39,7 @@ private:
 arrayQueue::arrayQueue(int capacity) {
 	this->capacity = capacity;
 	arr = new int[capacity];
-	frontIndex = rearIndex = 0; // capacityº¸´Ù Å©Áö¸¸ ¾ÊÀ¸¸é ¾Æ¹« °ª °¡´É
+	frontIndex = rearIndex = 0; // capacityë³´ë‹¤ í¬ì§€ë§Œ ì•Šìœ¼ë©´ ì•„ë¬´ ê°’ ê°€ëŠ¥
 	n = 0;
 }
 
@@ -64,7 +64,7 @@ void arrayQueue::enqueue(int data) {
 		return;
 	}
 	arr[rearIndex] = data;
-	rearIndex = (rearIndex + 1) % capacity; //-1 ÇÏ°í ½ÍÀ¸¸é +capacity ÇØÁà¾ßÇÔ
+	rearIndex = (rearIndex + 1) % capacity; //-1 í•˜ê³  ì‹¶ìœ¼ë©´ +capacity í•´ì¤˜ì•¼í•¨
 	n++;
 	return;
 }
@@ -92,7 +92,9 @@ int main() {
 			if (q.empty()) {
 				cout << "Empty" << "\n";
 			}
-			cout << q.front() << "\n";
+			else {
+				cout << q.front() << "\n";
+			}
 			continue;
 		}
 		if (command == "enqueue") {
