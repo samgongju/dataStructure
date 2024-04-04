@@ -26,6 +26,7 @@ arrayVector::arrayVector() {
 	arr = new int[1];
 	n = 0;
 }
+
 bool arrayVector::empty() {
 	return n == 0;
 }
@@ -33,6 +34,7 @@ bool arrayVector::empty() {
 int arrayVector::size() {
 	return n;
 }
+
 int arrayVector::at(int idx) {
 	if (idx< 0 || idx >= n) {
 		return -1;
@@ -88,6 +90,7 @@ void arrayVector::reserve(int size) {
 	arr = arrTemp;
 	capacity = size;
 }
+
 
 int main() {
 	return 0;
