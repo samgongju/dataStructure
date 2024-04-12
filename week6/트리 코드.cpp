@@ -1,8 +1,8 @@
-// Week6_Æ®¸®ÄÚµå(Å¬·¡½º ±¸Á¶)
+// Week6_íŠ¸ë¦¬ì½”ë“œ(í´ë˜ìŠ¤ êµ¬ì¡°)
 
 /*
-	1. Ç×»ó ·çÆ®°¡ Á¸ÀçÇÑ´Ù.
-	2. °°Àº °ªÀ» Áö´Ï´Â ³ëµå´Â ´Ü 1°³ Á¸Àç.
+	1. í•­ìƒ ë£¨íŠ¸ê°€ ì¡´ì¬í•œë‹¤.
+	2. ê°™ì€ ê°’ì„ ì§€ë‹ˆëŠ” ë…¸ë“œëŠ” ë‹¨ 1ê°œ ì¡´ì¬.
 	
 	* find: passbyreference
 */
@@ -40,6 +40,7 @@ Tree::Tree(int data) {
 	root = new node(data, NULL);
 	nodeList.push_back(root);
 }
+
 int Tree::find(int data, vector<node*>& List) {
 	for (int i{ 0 }; i < List.size(); i++) {
 		if (List[i]->data == data) {
@@ -48,13 +49,14 @@ int Tree::find(int data, vector<node*>& List) {
 	}
 	return -1;
 }
+
 void Tree::insertNode(int parData, int data) {
 	if (find(data, nodeList) != -1) {
 		return;
 	}
 
 	int idx = find(parData, nodeList);
-	if (idx != -1) {
+	if (idx == -1) {
 		return;
 	}
 
@@ -63,9 +65,10 @@ void Tree::insertNode(int parData, int data) {
 	parNode->childList.push_back(newNode);
 	nodeList.push_back(newNode);
 }
+
 void Tree::deleteNode(int data) {
 	int idx = find(data, nodeList);
-	if (idx != -1) {
+	if (idx == -1) {
 		return;
 	}
 
@@ -85,6 +88,7 @@ void Tree::deleteNode(int data) {
 	nodeList.erase(nodeList.begin() + idx);
 	delete delNode;
 }
+
 void Tree::printParent(int data) {
 	int idx = find(data, nodeList);
 	if (idx <= 0) {
@@ -111,6 +115,36 @@ void Tree::printChild(int data) {
 	cout << '\n';
 }
 
+
 int main() {
-	return 0;
+	Tree tree(1);
+
+	int size;
+	cin >> size;
+
+	while (size-- != 0) {
+		string s;
+		cin >> s;
+
+		if (s == "insert") {
+			int parData, data;
+			cin >> parData >> data;
+			tree.insertNode(parData, data);
+		}
+		else if (s == "delete") {
+			int data;
+			cin >> data;
+			tree.deleteNode(data);
+		}
+		else if (s == "printParent") {
+			int data;
+			cin >> data;
+			tree.printParent(data);
+		}
+		else if (s == "printChild") {
+			int data;
+			cin >> data;
+			tree.printChild(data);
+		}
+	}
 }
