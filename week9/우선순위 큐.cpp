@@ -2,11 +2,22 @@
 #include<vector>
 using namespace std;
 
+
+
 struct compare {
 	bool operator()(const int& ihs, const int& rhs) {
 		return ihs < rhs;
 	}
 };
+
+//struct compare {
+//	bool operator()(const int& ihs, const int& rhs) {
+//		if (ihs.age == rhs.age) {
+//			return ihs.height < rhs.height;
+//		}
+//		return ihs.age > rhs.age;
+//	}
+//};
 
 
 // unsorted
@@ -37,6 +48,7 @@ public:
 				minIdx = i;
 			}
 		}
+		return arr[minIdx];
 	}
 
 	void pop() {
@@ -51,8 +63,18 @@ public:
 
 		arr.erase(arr.begin() + minIdx);
 	}
+
+	void print() {
+		for (int i{ 0 }; i < size(); i++) {
+			cout << arr[i] << " ";
+		}
+		cout << '\n';
+	}
 };
 
+
+
+// sorted
 class sortedSeqPQ {
 private:
 	compare C;
@@ -67,7 +89,7 @@ public:
 		return size() == 0;
 	}
 
-	void push(int e) {  // ÀÛÀº ¼ýÀÚ°¡ µÚ¿¡ °¡ ÀÖÀ½.
+	void push(int e) {  // ìž‘ì€ ìˆ«ìžê°€ ë’¤ì— ê°€ ìžˆìŒ.
 		int idx;
 		for (idx = 0; idx < arr.size(); idx++) {
 			if (C(arr[idx], e)) { break; }
@@ -84,8 +106,54 @@ public:
 		if (empty()) { return; }
 		arr.pop_back();
 	}
+
+	void print() {
+		for (int i{ 0 }; i < size(); i++) {
+			cout << arr[i] << " ";
+		}
+		cout << '\n';
+	}
 };
 
+
+
+// í•œ ë²ˆ ì¨ ë³¸ê±°ìž„.
 int main() {
-	return 0;
+	int sz;
+	cin >> sz;
+
+	int* arr = new int[sz];
+	for (int i{ 0 }; i < sz; i++) {
+		cin >> arr[i];
+	}
+	
+	unsortedSeqPQ uns;
+	sortedSeqPQ sor;
+	for (int i{ 0 }; i < sz; i++) {
+		uns.push(arr[i]);
+		sor.push(arr[i]);
+	}
+	cout << "\nunsortedSeqPQ:\nbefore: ";
+	uns.print();
+	cout << "after: ";
+	for (int i{ 0 }; i < sz; i++) {
+		arr[i] = uns.top();
+		uns.pop();
+	}
+	for (int i{ 0 }; i < sz; i++) {
+		cout << arr[i] << " ";
+	}
+	cout << '\n';
+
+	cout << "\nsortedSeqPQ:\nbefore: ";
+	sor.print();
+	cout << "after: ";
+	for (int i{ 0 }; i < sz; i++) {
+		arr[i] = sor.top();
+		sor.pop();
+	}
+	for (int i{ 0 }; i < sz; i++) {
+		cout << arr[i] << " ";
+	}
+	cout << '\n';
 }
