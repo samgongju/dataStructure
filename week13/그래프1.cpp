@@ -1,5 +1,5 @@
-// ÀÎÁ¢ Çà·Ä Ç¥Çö¹ı(Adjacency Matrix Representation)
-// ±×·¡ÇÁ(°£´ÜÇÑ ±¸Çö) ÄÚµå
+// ì¸ì ‘ í–‰ë ¬ í‘œí˜„ë²•(Adjacency Matrix Representation)
+// ê·¸ë˜í”„(ê°„ë‹¨í•œ êµ¬í˜„) ì½”ë“œ
 
 #include<iostream>
 #include<string>
@@ -53,7 +53,7 @@ public:
 			return;
 		}
 
-		for (int i{ 1 }; i < N; ++i) {
+		for (int i{ 1 }; i <= N; ++i) {
 			adjacency_matrix[i][erase->GetMatrixIdx()] = false;
 			adjacency_matrix[erase->GetMatrixIdx()][i] = false;
 		}
@@ -68,7 +68,7 @@ public:
 
 		if (src == nullptr || dst == nullptr) { return; }
 		if (adjacency_matrix[src->GetMatrixIdx()][dst->GetMatrixIdx()] != false ||
-			adjacency_matrix[dst->GetMatrixIdx()][src->GetMatrixIdx()] != false) {
+		    adjacency_matrix[dst->GetMatrixIdx()][src->GetMatrixIdx()] != false) {
 			return;
 		}
 
@@ -82,7 +82,7 @@ public:
 
 		if (src == nullptr || dst == nullptr) { return; }
 		if (adjacency_matrix[src->GetMatrixIdx()][dst->GetMatrixIdx()] == false ||
-			adjacency_matrix[dst->GetMatrixIdx()][src->GetMatrixIdx()] == false) {
+		    adjacency_matrix[dst->GetMatrixIdx()][src->GetMatrixIdx()] == false) {
 			return;
 		}
 
