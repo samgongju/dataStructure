@@ -1,4 +1,4 @@
-// ÀÎÁ¢ Çà·Ä Ç¥Çö¹ı(Adjacency Matrix Representation)
+// ì¸ì ‘ í–‰ë ¬ í‘œí˜„ë²•(Adjacency Matrix Representation)
 
 #include<iostream>
 #include<string>
@@ -48,8 +48,8 @@ private:
 
 public:
 	vertexList() {
-		header = new vertex;
-		trailer = new vertex;
+		header = new vertex();
+		trailer = new vertex();
 		header->next = trailer;
 		trailer->prev = header;
 	}
@@ -181,7 +181,7 @@ public:
 		int srcMatrixId = src->matrixId;
 		int dstMatrixId = dst->matrixId;
 
-		if (edgeMatrix[srcMatrixId][dstMatrixId] != NULL || edgeMatrix[dstMatrixId][srcMatrixId] != NULL) {
+		if (edgeMatrix[srcMatrixId][dstMatrixId] == NULL || edgeMatrix[dstMatrixId][srcMatrixId] == NULL) {
 			return;
 		}
 
