@@ -1,10 +1,11 @@
+// Week10_P3
 #include<iostream>
 #include<vector>
 using namespace std;
 
 struct compare {
-	bool operator()(const int& ihs, const int& rhs) {
-		return ihs < rhs;  // min:<, max:>
+	bool operator()(const int& lhs, const int& rhs) {
+		return lhs > rhs;
 	}
 };
 
@@ -18,9 +19,11 @@ private:
 		arr[idx1] = arr[idx2];
 		arr[idx2] = arr[0];
 	}
-	
+
 	void upHeap(int idx) {
-		if (idx == 1) { return; }
+		if (idx == 1) {
+			return;
+		}
 
 		int parent = idx / 2;
 		if (!C(arr[parent], arr[idx])) {
@@ -41,7 +44,7 @@ private:
 			child = left;
 		}
 		else {
-			if (!C(arr[left], arr[right])) {
+			if (C(arr[left], arr[right])) {
 				child = left;
 			}
 			else {
@@ -61,7 +64,7 @@ public:
 	}
 
 	int size() {
-		return arr.size() - 1;
+		return (int)arr.size() - 1;
 	}
 
 	bool empty() {
@@ -74,40 +77,77 @@ public:
 	}
 
 	int top() {
-		if (empty()) { return -1; }
+		if (empty()) {
+			return -1;
+		}
+
 		return arr[1];
 	}
 
 	void pop() {
-		if (empty()) { return; }
+		if (empty()) {
+			return;
+		}
 
 		swap(1, size());
 		arr.pop_back();
 		downHeap(1);
 	}
 
-	void print() {
-		for (int i{ 1 }; i <= size(); i++) {
-			cout << arr[i] << " ";
+	void second_top() {
+		if (size() < 2) {
+			cout << "Error" << '\n';
+			return;
 		}
-		cout << '\n';
+
+		int left = 2;
+		int right = 3;
+		if (size() == 2 || C(arr[left], arr[right])) {
+			cout << arr[left] << '\n';
+		}
+		else {
+			cout << arr[right] << '\n';
+		}
 	}
 };
 
 int main() {
-	int t;
-	cin >> t;
+	int n;
+	cin >> n;
 
-	for (int k{ 0 }; k < t; k++) {
-		int n;
-		cin >> n;
+	string s;
+	heap h;
+	for (int i{ 0 }; i < n; i++) {
+		cin >> s;
 
-		heap h;
-		int a;
-		for (int i{ 0 }; i < n; i++) {
-			cin >> a;
-			h.push(a);
+		if (s == "size") {
+			cout << h.size() << '\n';
 		}
-		h.print();
+		else if (s == "empty") {
+			if (h.empty()) {
+				cout << 1 << '\n';
+				continue;
+			}
+			cout << 0 << '\n';
+		}
+		else if (s == "push") {
+			int x;
+			cin >> x;
+			h.push(x);
+		}
+		else if (s == "pop") {
+			if (h.empty()) {
+				cout << -1 << '\n';
+				continue;
+			}
+			cout << h.top() << '\n';
+			h.pop();
+		}
+		else if (s == "top") {
+			cout << h.top() << '\n';
+		}
+		else if (s == "second_top") {
+			h.second_top();
+		}
 	}
 }
